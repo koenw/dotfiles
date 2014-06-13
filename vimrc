@@ -124,3 +124,11 @@ nnoremap <silent> <leader>a: :Tabularize /:<CR>
 vnoremap <silent> <leader>a: :Tabularize /:<CR>
 nnoremap <silent> <leader>a<Bar> :Tabularize /<Bar><CR>
 vnoremap <silent> <leader>a<Bar> :Tabularize /<Bar><CR>
+
+" Airline
+let g:airline_powerline_fonts               = 1   " Try to use powerline fonts
+let g:airline#extensions#branch#enabled     = 1   " fugitive integration
+let g:airline#extensions#syntastic#enabled  = 1   " syntastic integration
+let g:airline#extensions#hunks#enabled      = 1   " show a summary of changed hunks
+let g:airline#extensions#hunks#non_zero_only = 0  " show only non-zero hunks
+let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-'] " hunk count symbols
