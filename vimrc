@@ -1,0 +1,126 @@
+call pathogen#infect()      " Call pathogen to enable the plugins in ~/.vim/bundle
+
+set nocompatible
+
+set hidden                  " Allow buffer switching without saving
+set backup                  " Make a backup of the file before saving
+set backupdir=~/.vim/backup " Directory to write backups to (should exist)
+set history=1000            " Save a lot of history (default is 20)
+if has('persistent_undo')
+  set undofile              " Use persistent undo file
+  set undodir=~/.vim/undo   " Directory to write undo files to (should exist)
+  set undolevels=1000       " Maximum number of changes that can be undone
+  set undoreload=10000      " Maximum number of lines to save for undo on buffer reload
+endif
+
+set tabstop=2               " Number of spaces that equals a tab
+set shiftwidth=2            " Number of spaces to shift (e.g. >> and <<) with
+set expandtab               " Insert spaces instead of tabs
+set autoindent              " Automatically indent to the previous lines' indent level
+
+set visualbell              " Use visual bell instead of a beep
+set ttyfast                 " Let vim know we have a fast terminal, regardless of $TERM
+
+set encoding=utf-8          " Set default file encoding to utf-8
+
+colorscheme solarized       " Use solarized color scheme
+set background=dark         " With a dark background
+syntax on                   " Enable syntax highlighting
+set relativenumber          " Show relative line numbers from current line (instead of `set nu`)
+set number
+set cursorline              " Highlight current line
+highlight clear SignColumn  " Make 'gutter' background match buffer background
+set listchars=tab:▸\ ,eol:¬ " Characters to use for tabs and newlines for `set list`
+set laststatus=2            " Always display the powerline statusline
+set noshowmode              " Hide the default mode text (e.g. '-- INSERT --') below the status line
+
+" highlight trailing whitespace in red, but not on the line we're typing
+highlight TrailingWhitespace ctermbg=red guibg=red
+match TrailingWhitespace /\s\+$/
+au InsertEnter * match TrailingWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match TrailingWhitespace /\s\+$/
+
+if has('gui_running')
+  set guioptions-=T         " Remove the toolbar
+  set guioptions-=m         " Remove the menubar
+  set guioptions-=r         " Remove the scrollbar
+endif
+
+if ! has('gui_running')
+  set ttimeoutlen=10
+  augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=0
+  augroup END
+endif
+
+set scrolloff=10            " Minimum number of lines to keep visible around cursor
+set scrolljump=0            " Number of lines to scroll when cursor leaves screen
+
+set wildmenu                " Show list instead of just completing
+set wildmode=list:longest   " Tab completion: list matches, then longest common part
+
+set incsearch               " Search as you type
+set ignorecase              " Make search case insensitive
+set smartcase               " Don't make search case insensitive if UC present
+
+set spell
+
+let mapleader = ";"         " Set the leader to ";", easy on the hands
+noremap <silent> <leader>e  :NERDTreeFind<CR>
+noremap <silent> <C-e>      :NERDTreeToggle<CR>
+" Bind <leader>vs to setup a vsplit buffer, scrolling 'below' the current buffer
+noremap <silent> <leader>vs :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
+" Go down to next row, instead of next line
+nnoremap j gj
+" Go up to previous row, instead of previous line
+nnoremap k gk
+" Bind Y to yank from the cursor to the end of the line
+nnoremap Y y$
+
+if has("autocmd")
+  " Restore cursor position
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+
+  " Set filetype to arduino on .pde files
+  autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
+
+  " Change tab settings in python files
+  autocmd FileType python setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
+  " Change tab settings in C# files
+  autocmd FileType cs setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
+
+  " Automatically enable Rainbow parentheses
+  " https://github.com/kien/rainbow_parentheses.vim#readme
+  au VimEnter * RainbowParenthesesToggle
+  au Syntax * RainbowParenthesesLoadRound
+  au Syntax * RainbowParenthesesLoadSquare
+  au Syntax * RainbowParenthesesLoadBraces
+
+  " Enable omni completion.
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+endif
+
+" key bindings for fugitive
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gc :Gcommit -v<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+
+" key bindings for tabularize
+nnoremap <silent> <leader>a= :Tabularize /=<CR>
+vnoremap <silent> <leader>a= :Tabularize /=<CR>
+nnoremap <silent> <leader>a: :Tabularize /:<CR>
+vnoremap <silent> <leader>a: :Tabularize /:<CR>
+nnoremap <silent> <leader>a<Bar> :Tabularize /<Bar><CR>
+vnoremap <silent> <leader>a<Bar> :Tabularize /<Bar><CR>
