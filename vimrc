@@ -91,8 +91,6 @@ if has("autocmd")
 
   " Change tab settings in python files
   autocmd FileType python setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
-  " Change tab settings in C# files
-  autocmd FileType cs setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
 
   " Automatically enable Rainbow parentheses
   " https://github.com/kien/rainbow_parentheses.vim#readme
