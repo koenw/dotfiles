@@ -1,0 +1,2 @@
+This directory should exist or vim will complain, but
+git won't track empty directories. Hence my raison d'être.
