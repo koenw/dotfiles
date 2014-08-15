@@ -68,6 +68,7 @@ set smartcase               " Don't make search case insensitive if UC present
 set spell
 
 let mapleader = ";"         " Set the leader to ";", easy on the hands
+noremap <silent> <leader>;  q:
 noremap <silent> <leader>e  :NERDTreeFind<CR>
 noremap <silent> <C-e>      :NERDTreeToggle<CR>
 " Bind <leader>vs to setup a vsplit buffer, scrolling 'below' the current buffer
