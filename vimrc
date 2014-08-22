@@ -5,6 +5,7 @@ set nocompatible
 set hidden                  " Allow buffer switching without saving
 set backup                  " Make a backup of the file before saving
 set backupdir=~/.vim/backup " Directory to write backups to (should exist)
+set directory=~/.vim/tmp    " No more .sw[a-z] (swap) files all over the place (should exist)
 set history=1000            " Save a lot of history (default is 20)
 if has('persistent_undo')
   set undofile              " Use persistent undo file

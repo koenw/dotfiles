@@ -1,0 +1,5 @@
+This directory should exist or vim will not be able to write its swap files,
+leaving it with an empty document (don't ask me why! - never noticed this
+because naturally, the basedir of the file being opened always exists).
+
+Git won't let me track empty directories though, hence this file.
