@@ -91,8 +91,9 @@ if has("autocmd")
   " Set filetype to arduino on .pde files
   autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 
-  " Change tab settings in python files
-  autocmd FileType python setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
+  " Change tab settings some file types
+  autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
+  autocmd FileType rust setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
   " Automatically enable Rainbow parentheses
   " https://github.com/kien/rainbow_parentheses.vim#readme
