@@ -1,3 +1,4 @@
 .*.sw[a-z]
 vim/backup
 vim/undo
+vim/tmp
