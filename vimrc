@@ -112,6 +112,11 @@ if has("autocmd")
   autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 endif
 
+" Keep wrapped lines indented
+if v:version > 704 || v:version == 704 && has("patch338")
+  set breakindent
+endif
+
 " key bindings for fugitive
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
