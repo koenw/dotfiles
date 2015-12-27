@@ -138,3 +138,13 @@ let g:airline#extensions#syntastic#enabled  = 1   " syntastic integration
 let g:airline#extensions#hunks#enabled      = 1   " show a summary of changed hunks
 let g:airline#extensions#hunks#non_zero_only = 0  " show only non-zero hunks
 let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-'] " hunk count symbols
+
+" vim-go
+" Enable goimports to automatically insert import paths instead of gofmt
+let g:go_fmt_command = "goimports"
+" More syntax highlighting
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
