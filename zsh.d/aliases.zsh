@@ -1,37 +1,20 @@
-# vim: foldmethod=marker syntax=zsh
-# {{{ default arguments
-if [[ `uname` == "FreeBSD" ]]; then
-  alias ls='ls -F'
-else
+if ls --color=auto >&/dev/null; then
   alias ls='ls -F --color=auto'
+else
+  alias ls='ls -F'
 fi
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
 alias ll='ls -ltrh'
-alias mv='mv -iv'
-alias cp='cp -iva'
-alias vi='vim'
-alias scp='scp -o cipher=blowfish'
+
+if grep --color=auto >&/dev/null; then
+  alias grep='grep --color=auto'
+  alias egrep='egrep --color=auto'
+fi
+
+if which vim > /dev/null; then
+  alias vi='vim'
+fi
 
 alias find='noglob find'
-alias slocate='noglob slocate'
-alias locate='noglob locate'
-alias mlocate='noglob mlocate'
-
-alias top='htop'
-
-alias vimm='vim -c NotMuch'
-# }}}
-
-# {{{ shortcuts
-alias burn='cdrecord -v speed=4 dev=/dev/cdrom'
-# }}}
-
-# {{{ Global aliases
-alias -g L='|less'
-alias -g G='|grep'
-alias -g T='|tail'
-# }}}
 
 # {{{ functions
 extract () {
