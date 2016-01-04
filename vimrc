@@ -1,6 +1,8 @@
 call pathogen#infect()      " Call pathogen to enable the plugins in ~/.vim/bundle
 call pathogen#helptags()
 
+filetype plugin on          " Enable filetype plugins
+
 set nocompatible
 
 set hidden                  " Allow buffer switching without saving
