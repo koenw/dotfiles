@@ -15,6 +15,7 @@ if which vim > /dev/null; then
 fi
 
 alias find='noglob find'
+alias git='noglob git'
 
 # {{{ functions
 extract () {
