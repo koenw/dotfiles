@@ -1,4 +1,5 @@
 call pathogen#infect()      " Call pathogen to enable the plugins in ~/.vim/bundle
+call pathogen#helptags()
 
 set nocompatible
 
