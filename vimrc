@@ -142,6 +142,9 @@ let g:airline#extensions#hunks#enabled      = 1   " show a summary of changed hu
 let g:airline#extensions#hunks#non_zero_only = 0  " show only non-zero hunks
 let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-'] " hunk count symbols
 
+" Syntastic
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+
 " vim-go
 " Enable goimports to automatically insert import paths instead of gofmt
 let g:go_fmt_command = "goimports"
