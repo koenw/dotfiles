@@ -113,6 +113,9 @@ if has("autocmd")
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
   autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
   autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+  " Automatically invoke clang-format on buffer write
+  au FileType c ClangFormatAutoEnable
 endif
 
 " Keep wrapped lines indented
@@ -154,3 +157,6 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+
+" YouCompleteMe extra_conf whitelist/blacklist
+let g:ycm_extra_conf_globlist = ['~/dev/*','~/sync/dev/*','!~/*']
