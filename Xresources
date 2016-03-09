@@ -4,9 +4,14 @@ URxvt*depth: 32
 URxvt*scrollBar:false
 ! URxvt*borderLess: True
 URxvt*font:xft:Source Code Pro:size=9:antialias:true:hinting:true,xft:Inconsolata for Powerline:antialias:true:hinting:true
-URxvt.perl-ext-common:font-size
+URxvt.iso14755: False
+URxvt.perl-ext-common:default,clipboard,font-size
 URxvt.keysym.C-Up:     perl:font-size:increase
 URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.clipboard.copycmd:  xsel -ib
+URxvt.clipboard.pastecmd: xsel -ob
 !}}}
 
 !{{{ Solarized colorscheme: https://github.com/altercation/solarized
