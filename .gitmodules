@@ -37,3 +37,6 @@
 [submodule "vim/bundle/vim-clang-format"]
 	path = vim/bundle/vim-clang-format
 	url = https://github.com/rhysd/vim-clang-format.git
+[submodule "vim/bundle/nim.vim"]
+	path = vim/bundle/nim.vim
+	url = https://github.com/zah/nim.vim.git
