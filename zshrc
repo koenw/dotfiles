@@ -51,8 +51,8 @@ zstyle ':completion:*:match:*' original only
 
 # {{{ history
 export HISTFILE=~/.zsh_history
-export HISTSIZE=10000
-export SAVEHIST=10000
+export HISTSIZE=-1
+export SAVEHIST=-1
 
 setopt inc_append_history
 setopt extended_history  # mainly save time details
