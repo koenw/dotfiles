@@ -1,4 +1,4 @@
-for dir in ~/.rbenv/bin ~/.rbenv/shims ~/.gem/ruby/*/bin(oc); do
+for dir in ~/.rbenv/bin ~/.rbenv/shims ~/.gem/ruby/*/bin(ocN); do
   if test -d "$dir"; then
     export PATH="${PATH}:${dir}"
   fi
