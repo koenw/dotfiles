@@ -40,3 +40,6 @@
 [submodule "vim/bundle/nim.vim"]
 	path = vim/bundle/nim.vim
 	url = https://github.com/zah/nim.vim.git
+[submodule "vim/bundle/vim-bufferline"]
+	path = vim/bundle/vim-bufferline
+	url = https://github.com/bling/vim-bufferline
