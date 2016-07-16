@@ -10,7 +10,9 @@ if grep --color=auto >&/dev/null; then
   alias egrep='egrep --color=auto'
 fi
 
-if which vim > /dev/null; then
+if which nvim > /dev/null; then
+  alias vi='nvim'
+elif which vim > /dev/null; then
   alias vi='vim'
 fi
 
