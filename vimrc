@@ -160,3 +160,7 @@ let g:go_highlight_build_constraints = 1
 
 " YouCompleteMe extra_conf whitelist/blacklist
 let g:ycm_extra_conf_globlist = ['~/dev/*','~/sync/dev/*','!~/*']
+
+" vim-bufferline
+" Fix annoying redundant echo beneath statusline
+let g:bufferline_echo = 0
