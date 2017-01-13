@@ -98,13 +98,6 @@ if has("autocmd")
   autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
   autocmd FileType rust setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
-  " Automatically enable Rainbow parentheses
-  " https://github.com/kien/rainbow_parentheses.vim#readme
-  au VimEnter * RainbowParenthesesToggle
-  au Syntax * RainbowParenthesesLoadRound
-  au Syntax * RainbowParenthesesLoadSquare
-  au Syntax * RainbowParenthesesLoadBraces
-
   " Enable omni completion.
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
