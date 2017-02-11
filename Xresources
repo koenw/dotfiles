@@ -35,25 +35,25 @@ URxvt.clipboard.pastecmd: xsel -ob
 !!green     #859900  2/2 green     64 #5f8700 60 -20  65 133 153   0  68 100  60
 
 !! Dark
-#define S_base03        #002b36
-#define S_base02        #073642
-#define S_base01        #586e75
-#define S_base00        #657b83
-#define S_base0         #839496
-#define S_base1         #93a1a1
-#define S_base2         #eee8d5
-#define S_base3         #fdf6e3
+!#define S_base03        #002b36
+!#define S_base02        #073642
+!#define S_base01        #586e75
+!#define S_base00        #657b83
+!#define S_base0         #839496
+!#define S_base1         #93a1a1
+!#define S_base2         #eee8d5
+!#define S_base3         #fdf6e3
 
-#define S_yellow        #b58900
-#define S_orange        #cb4b16
-#define S_red           #dc322f
-#define S_magenta       #d33682
-#define S_violet        #6c71c4
-#define S_blue          #268bd2
-#define S_cyan          #2aa198
-#define S_green         #859900
-
-! Light
+!#define S_yellow        #b58900
+!#define S_orange        #cb4b16
+!#define S_red           #dc322f
+!#define S_magenta       #d33682
+!#define S_violet        #6c71c4
+!#define S_blue          #268bd2
+!#define S_cyan          #2aa198
+!#define S_green         #859900
+!
+!! Light
 !#define S_base03        #fdf6e3
 !#define S_base02        #eee8d5
 !#define S_base01        #93a1a1
@@ -62,44 +62,80 @@ URxvt.clipboard.pastecmd: xsel -ob
 !#define S_base1         #586e75
 !#define S_base2         #073642
 !#define S_base3         #002b36
+!
+!*background:            S_base03
+!*foreground:            S_base00
+!*fading:                40
+!*fadeColor:             S_base03
+!*cursorColor:           S_base1
+!*pointerColorBackground:S_base01
+!*pointerColorForeground:S_base1
+!
+!!! black dark/light
+!*color0:                S_base02
+!*color8:                S_base03
+!
+!!! red dark/light
+!*color1:                S_red
+!*color9:                S_orange
+!
+!!! green dark/light
+!*color2:                S_green
+!*color10:               S_base01
+!
+!!! yellow dark/light
+!*color3:                S_yellow
+!*color11:               S_base00
+!
+!!! blue dark/light
+!*color4:                S_blue
+!*color12:               S_base0
+!
+!!! magenta dark/light
+!*color5:                S_magenta
+!*color13:               S_violet
+!
+!!! cyan dark/light
+!*color6:                S_cyan
+!*color14:               S_base1
+!
+!!! white dark/light
+!*color7:                S_base2
+!*color15:               S_base3
+!}}}
 
-*background:            S_base03
-*foreground:            S_base00
-*fading:                40
-*fadeColor:             S_base03
-*cursorColor:           S_base1
-*pointerColorBackground:S_base01
-*pointerColorForeground:S_base1
 
-!! black dark/light
-*color0:                S_base02
-*color8:                S_base03
 
-!! red dark/light
-*color1:                S_red
-*color9:                S_orange
+!{{{ zenburn color scheme
+*background:  #3f3f3f
+*foreground:  #dcdccc
+*fading: 40
+*fadeColor: #3f3f3f
+*cursorColor: #93e0e3
 
-!! green dark/light
-*color2:                S_green
-*color10:               S_base01
-
-!! yellow dark/light
-*color3:                S_yellow
-*color11:               S_base00
-
-!! blue dark/light
-*color4:                S_blue
-*color12:               S_base0
-
-!! magenta dark/light
-*color5:                S_magenta
-*color13:               S_violet
-
-!! cyan dark/light
-*color6:                S_cyan
-*color14:               S_base1
-
-!! white dark/light
-*color7:                S_base2
-*color15:               S_base3
+! black + red
+*color0:      #1E2320
+!*color1:      #705050
+*color1:      #d78787
+! green + yellow
+*color2:      #60b48a
+*color3:      #dfaf8f
+! blue + purple
+*color4:      #506070
+*color5:      #dc8cc3
+! cyan + white
+*color6:      #8cd0d3
+*color7:      #dcdccc
+! bright-black + bright-red
+*color8:      #709080
+*color9:      #dca3a3
+! bright-green + bright-yellow
+*color10:     #c3bf9f
+*color11:     #f0dfaf
+! bright-blue + bright-purple
+*color12:     #94bff3
+*color13:     #ec93d3
+! bright-cyan + bright-white
+*color14:     #93e0e3
+*color15:     #ffffff
 !}}}
