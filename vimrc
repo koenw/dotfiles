@@ -27,7 +27,8 @@ set ttyfast                 " Let vim know we have a fast terminal, regardless o
 
 set encoding=utf-8          " Set default file encoding to utf-8
 
-colorscheme solarized       " Use solarized color scheme
+"colorscheme solarized       " Use solarized color scheme
+colorscheme zenburn
 set background=dark         " With a dark background
 syntax on                   " Enable syntax highlighting
 set relativenumber          " Show relative line numbers from current line (instead of `set nu`)
