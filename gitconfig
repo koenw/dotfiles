@@ -1,0 +1,13 @@
+[user]
+	email = koen@chillheid.nl
+	name = Koen Wilde
+
+[color]
+  ui = true
+
+[alias]
+  l = log --graph --decorate --all
+  s = status -sb
+  d = diff
+  b = branch -a
+  r = remote -v

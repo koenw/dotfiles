@@ -18,7 +18,7 @@ set -eu
 # Defaults
 #
 ## Files directly in $HOME to create symlinks to.
-files=(gpg-agent.conf gpg.conf htoprc tmux.conf vimrc vim tmux.conf Xresources zshrc zsh.d xinitrc)
+files=(gpg-agent.conf gpg.conf htoprc tmux.conf vimrc vim tmux.conf Xresources zshrc zsh.d xinitrc gitconfig)
 ## Directories in ${HOME}/.config to create symlinks to
 dot_config_dirs=(awesome)
 ## Don't prompt before removing current file
