@@ -1,6 +1,6 @@
-for dir in /usr/bin /usr/sbin /sbin /bin; do
+for dir in /usr/bin /usr/sbin /sbin /bin /usr/local/bin /usr/local/sbin; do
   if test -d "$dir" && ! grep -q -e "^${dir}:" -e ":${dir}:" -e ":${dir}" <<< $PATH; then
-    PATH="${dir}:${PATH}"
+    PATH="${PATH}:${dir}"
   fi
 done
 export PATH
