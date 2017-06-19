@@ -294,11 +294,11 @@ globalkeys = awful.util.table.join(
     awful.key({}, "XF86MonBrightnessDown",function () awful.util.spawn("sudo brigo -d") end),
 
     -- Media
-    awful.key({modkey, },         "#108", function () awful.util.spawn("amixer -c 1 sset Master 1%-") end),
-    awful.key({modkey, },         "#103", function () awful.util.spawn("amixer -c 1 sset Master 1%+") end),
-    awful.key({}, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -c 1 sset Master 1%-") end),
-    awful.key({}, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -c 1 sset Master 1%+") end),
-    awful.key({}, "XF86AudioMute",        function () awful.util.spawn("amixer -c 1 sset Master toggle") end),
+    awful.key({modkey, },         "#108", function () awful.util.spawn("amixer -c 0 sset Master 1%-") end),
+    awful.key({modkey, },         "#103", function () awful.util.spawn("amixer -c 0 sset Master 1%+") end),
+    awful.key({}, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -c 0 sset Master 1%-") end),
+    awful.key({}, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -c 0 sset Master 1%+") end),
+    awful.key({}, "XF86AudioMute",        function () awful.util.spawn("amixer -c 0 sset Master toggle") end),
     awful.key({}, "XF86AudioPlay",        function () awful.util.spawn("mpc toggle") end),
     awful.key({}, "XF86AudioNext",        function () awful.util.spawn("mpc next") end),
     awful.key({}, "XF86AudioPrev",        function () awful.util.spawn("mpc prev") end),
