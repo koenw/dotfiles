@@ -3,7 +3,13 @@ if ls --color=auto >&/dev/null; then
 else
   alias ls='ls -F'
 fi
-alias ll='ls -ltrh'
+
+alias exa='exa -l --sort=modified --git'
+if which exa >/dev/null; then
+  alias ll='exa'
+else
+  alias ll='ls -ltrh'
+fi
 
 if grep --color=auto >&/dev/null; then
   alias grep='grep --color=auto'
