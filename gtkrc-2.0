@@ -1,0 +1,3 @@
+include "/usr/share/themes/Clearlooks/gtk-2.0/gtkrc"
+
+include "/home/koen/.gtkrc.mine"
