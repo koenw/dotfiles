@@ -9,4 +9,6 @@ xautolock -time 5 -locker 'xset dpms force off' -killer 'i3lock -c 000000' -kill
 setxkbmap -option compose:ralt  # use right alt for special characters
 setxkbmap -option caps:escape   # bind CapsLock to Escape
 
+pgrep redshift &> /dev/null || redshift &> /dev/null &
+
 exec awesome
