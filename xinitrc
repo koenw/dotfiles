@@ -11,4 +11,6 @@ setxkbmap -option caps:escape   # bind CapsLock to Escape
 
 pgrep redshift &> /dev/null || redshift -t 6500:3500 &> /dev/null &
 
+pgrep unclutter &> /dev/null || unclutter &> /dev/null &
+
 exec awesome
