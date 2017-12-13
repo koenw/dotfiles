@@ -50,16 +50,18 @@ create_symlink() {
   name="$2"
   force="${FORCE=false}"
 
-	# `test` follows symlink, so we'll have to check this way
-	if ls "$name" >/dev/null 2>&1; then
-		if "$force"; then
-			rm -rf "$name"
-		else
-			rm -ri "$name"
-		fi
-	fi
+  # Check to see if there is something to do
+  if test ! -L "$name" -o "$(readlink "$name")" != "$target"; then
+    if test -e "$name"; then
+      if "$force"; then
+        rm -rf "$name"
+      else
+        rm -ri "$name"
+      fi
+    fi
 
-	ln -s "$target" "$name"
+    ln -s "$target" "$name"
+  fi
 }
 
 # Create the $HOME/<name> symlinks
