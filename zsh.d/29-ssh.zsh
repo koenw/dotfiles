@@ -1,6 +1,6 @@
 function ssh() {
   setopt extendedglob
-  keyLifetime=$((60 * 60))
+  keyLifetime=4h
 
   if ls ~/.ssh/id_rsa*~*.pub > /dev/null; then
     if ! ssh-add -l > /dev/null; then
