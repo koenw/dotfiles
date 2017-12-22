@@ -13,9 +13,6 @@
 [submodule "vim/bundle/vim-tabular"]
 	path = vim/bundle/vim-tabular
 	url = https://github.com/godlygeek/tabular.git
-[submodule "vim/bundle/YouCompleteMe"]
-	path = vim/bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic
