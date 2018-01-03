@@ -149,6 +149,26 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
+" rust.vim
+let g:rustfmt_autosave = 1  " automatically run `rustfmt` on save
+
+" LanguageClient-neovim
+set runtimepath+=~/.vim/bundle/LanguageClient-neovim
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ }
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> S :call LanguageClient_textDocument_documentSymbol()<CR>
+" end LanguageClient-neovim
+
 " YouCompleteMe extra_conf whitelist/blacklist
 let g:ycm_extra_conf_globlist = ['~/dev/*','~/sync/dev/*','!~/*']
 
