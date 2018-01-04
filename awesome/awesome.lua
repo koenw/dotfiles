@@ -45,7 +45,8 @@ beautiful.init(awful.util.get_themes_dir() .. "zenburn/theme.lua")
 beautiful.wallpaper = awful.util.get_themes_dir() .. "wallpaper.png"
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvtc"
+-- terminal = "urxvtc"
+terminal = "termite"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -493,9 +494,6 @@ awful.rules.rules = {
 --     { rule_any = {type = { "normal", "dialog" }
 --       }, properties = { titlebars_enabled = true }
 --     },
-    { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
-    },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
