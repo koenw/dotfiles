@@ -10,7 +10,7 @@ fi
 # }}}
 
 # {{{ ENVIRONMENT
-export EDITOR=vim
+export EDITOR=nvim
 export VISUAL=$EDITOR
 export PAGER=less
 # }}}
@@ -19,7 +19,7 @@ export PAGER=less
 export PS1='%B%{[39m%}%n %{[39m%}%m%{[39m%}:%{[36m%}%2c%{[39m%} [%{[33m%}%h%{[39m%}%1(j.%{[30m%}%%%j%{[39m%}.)%0(?..:%{[31m%}%?%{[39m%})]%#%b '
 
 if [[ -x `which dircolors` ]]; then
-  eval `dircolors -b`   # sets LSCOLORS for GNU ls
+  eval `dircolors -b ~/.config/dircolors`   # sets LSCOLORS
 else
   export CLICOLOR=1     # BSD ls
 fi
