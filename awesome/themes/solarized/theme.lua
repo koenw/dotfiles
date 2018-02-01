@@ -9,7 +9,7 @@
 -- {{{ Main
 theme = {}
 theme.default_themes_path = "/usr/share/awesome/themes"
-theme.wallpaper_cmd = { "awsetbg "..theme.default_themes_path.."/zenburn/zenburn-background.png" }
+theme.wallpaper_cmd = { " " }
 theme.colors = {}
 theme.colors.base3   = "#002b36ff"
 theme.colors.base2   = "#073642ff"
@@ -30,12 +30,13 @@ theme.colors.green   = "#859900ff"
 -- }}}
 
 -- {{{ Styles
-theme.font      = "Terminus 9"
+theme.font = "xdt:DejaVu Sans Mono for Powerline 9"
 
 -- {{{ Colors
-theme.fg_normal  = theme.colors.base02
-theme.fg_focus   = theme.colors.base03
+theme.fg_normal  = theme.colors.base01
+theme.fg_focus   = theme.colors.base01
 theme.fg_urgent  = theme.colors.base3
+--}}}
 
 theme.bg_normal  = theme.colors.base3
 theme.bg_focus   = theme.colors.base1
@@ -44,15 +45,14 @@ theme.bg_systray = theme.bg_normal
 -- }}}
 
 -- {{{ Borders
-theme.border_width  = "2"
-theme.border_normal = theme.bg_normal
-theme.border_focus  = theme.bg_focus
+theme.border_width  = "1"
+theme.border_normal = theme.colors.base2
+theme.border_focus  = "#73635a"
 theme.border_marked = theme.bg_urgent
 -- }}}
 
--- {{{ Titlebars
-theme.titlebar_bg_focus  = theme.bg_focus
-theme.titlebar_bg_normal = theme.bg_normal
+-- {{{ Taglist
+theme.taglist_fg_focus = theme.colors.base03
 -- }}}
 
 -- {{{ Mouse finder
