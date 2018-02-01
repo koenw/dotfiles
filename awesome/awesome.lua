@@ -354,7 +354,23 @@ globalkeys = awful.util.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+
+    -- sort clients
+    awful.key({ modkey, "Control" }, "s",
+      function ()
+        for _, c in ipairs(client.get()) do
+          if c.class == "Termite" then
+            c:move_to_tag(c.screen.tags[1])
+          elseif c.class == "Firefox" then
+            c:move_to_tag(c.screen.tags[2])
+          elseif c.class == "Spotify" then
+            c:move_to_tag(c.screen.tags[8])
+          elseif c.class == "Chromium" then
+            c:move_to_tag(c.screen.tags[3])
+          end
+        end
+      end)
 )
 
 clientkeys = awful.util.table.join(
