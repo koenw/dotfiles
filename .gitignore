@@ -4,3 +4,5 @@ vim/undo
 vim/tmp
 vim/.netrwhist
 zsh.d/*.zsh
+
+ssh
