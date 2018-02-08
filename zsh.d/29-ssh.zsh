@@ -1,5 +1,5 @@
 function ssh() {
-  keyLifeTime=1h
+  keyLifeTime=2h
 
   for key in ~/.ssh/id_*~*.pub; do
     ssh-key-added "$key" || _ssh-add -t $keyLifeTime "$key"
