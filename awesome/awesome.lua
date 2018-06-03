@@ -42,7 +42,8 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "solarized/theme.lua")
-beautiful.init("~/.config/awesome/themes/solarized/theme.lua")
+-- beautiful.init("~/.config/awesome/themes/solarized/theme.lua")
+beautiful.init(gears.filesystem.get_themes_dir() .. "zenburn/theme.lua")
 beautiful.wallpaper = "/home/koen/.config/awesome/themes/wallpaper.png"
 
 -- This is used later as the default terminal and editor to run.
