@@ -30,5 +30,9 @@ if which bat >/dev/null; then
   alias cat='bat'
 fi
 
+if which jexec >/dev/null; then
+  alias jexec='jexec -l'
+fi
+
 alias find='noglob find'
 alias git='noglob git'
