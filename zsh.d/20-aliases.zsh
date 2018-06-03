@@ -26,5 +26,9 @@ elif which vim > /dev/null; then
   alias vi='vim'
 fi
 
+if which bat >/dev/null; then
+  alias cat='bat'
+fi
+
 alias find='noglob find'
 alias git='noglob git'
