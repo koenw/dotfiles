@@ -11,10 +11,10 @@ function project-init() {
   git commit --allow-empty -m "Initial commit"
 
   echo "# $name" > README.md
-  cat > LICENSE <<EOF
+  cat > LICENSE-MIT <<EOF
 MIT License
 
-Copyright (c) 2017
+Copyright (c) $(date +%Y)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -35,9 +35,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 EOF
 
+  cat > LICENSE-APACHE <<EOF
+Copyright $(date +%Y) $(git config user.name)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+EOF
+
   git add README.md
-  git add LICENSE
-  git commit -m "Add README and (MIT) License"
+  git add LICENSE-MIT
+  git add LICENSE-APACHE
+  git commit -m "Add README and Licenses"
 
   eval $cur_errreturn
 }
