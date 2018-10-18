@@ -99,15 +99,13 @@ if has("autocmd")
   autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
   autocmd FileType rust setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
-  " Enable omni completion.
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-  autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+  " Enable ncm2 (completion framework) for all buffers
+  autocmd BufEnter * call ncm2#enable_for_buffer()
 endif
+
+" ncm2 (completion framework)
+" see :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect
 
 " Keep wrapped lines indented
 if v:version > 704 || v:version == 704 && has("patch338")
@@ -169,9 +167,6 @@ nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 nnoremap <silent> S :call LanguageClient_textDocument_documentSymbol()<CR>
 " end LanguageClient-neovim
-
-" YouCompleteMe extra_conf whitelist/blacklist
-let g:ycm_extra_conf_globlist = ['~/dev/*','~/sync/dev/*','!~/*']
 
 " vim-bufferline
 " Fix annoying redundant echo beneath statusline
