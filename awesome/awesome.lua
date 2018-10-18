@@ -294,8 +294,8 @@ globalkeys = awful.util.table.join(
               {description = "quit awesome", group = "awesome"}),
 
     -- Display Brightness
-    awful.key({}, "XF86MonBrightnessUp",  function () awful.util.spawn("sudo brigo -i") end),
-    awful.key({}, "XF86MonBrightnessDown",function () awful.util.spawn("sudo brigo -d") end),
+    awful.key({}, "XF86MonBrightnessUp",  function () awful.util.spawn("xbacklight -inc 2 -time 0") end),
+    awful.key({}, "XF86MonBrightnessDown",function () awful.util.spawn("xbacklight -dec 2 -time 0") end),
 
     -- Media
     awful.key({modkey, },         "#108", function () awful.util.spawn("amixer -c 0 sset Master 1%-") end),
