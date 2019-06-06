@@ -48,7 +48,8 @@ beautiful.wallpaper = "/home/koen/.config/awesome/themes/wallpaper.png"
 
 -- This is used later as the default terminal and editor to run.
 -- terminal = "urxvtc"
-terminal = "termite"
+terminal = "urxvtc"
+-- terminal = "termite"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -363,6 +364,8 @@ globalkeys = awful.util.table.join(
       function ()
         for _, c in ipairs(client.get()) do
           if c.class == "Termite" then
+            c:move_to_tag(c.screen.tags[1])
+          elseif c.class == "URxvt" then
             c:move_to_tag(c.screen.tags[1])
           elseif c.class == "Firefox" then
             c:tags({c.screen.tags[2], c.screen.tags[10]})
