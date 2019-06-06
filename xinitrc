@@ -4,7 +4,7 @@ urxvtd &
 xset b off &                    # no audio bell
 numlockx &
 xrdb -merge ~/.Xresources &
-xmodmap ~/.xmodmap
+xmodmap ~/.Xmodmap
 setxkbmap -option compose:ralt
 
 pgrep redshift &> /dev/null || redshift -t 6500:3500 &> /dev/null &

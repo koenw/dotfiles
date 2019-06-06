@@ -19,7 +19,7 @@ set -eu
 #
 ## Files directly in $HOME to create symlinks to.
 #files=(gnupg htoprc tmux.conf vimrc vim tmux.conf Xresources zshrc zsh.d xinitrc gitconfig)
-files=(htoprc tmux.conf vimrc vim tmux.conf Xresources zshrc zsh.d xinitrc gitconfig gtkrc-2.0 krb5.conf xmodmap ssh)
+files=(htoprc tmux.conf vimrc vim tmux.conf Xresources zshrc zsh.d xinitrc gitconfig gtkrc-2.0 krb5.conf Xmodmap ssh)
 ## Directories in ${HOME}/.config to create symlinks to
 dot_config_dirs=(awesome dircolors)
 ## Don't prompt before removing current file
