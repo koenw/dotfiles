@@ -1,10 +1,12 @@
 function title {
    if [[ $TERM == "screen"* ]]; then
-      print -nR $'\033k'$1$'\033\\'
-      print -nR $'\033]0;'$2$'\a'
+      # set tmux title
+      printf '\033]2;%s\033\\' $1
+      # set terminal title
+      print -nR $'\033]0;'$1$'\a'
    else
-      #print -Pn "\e]0;%n@%m: %~\a"
-      #print -Pn "\e]0;$1\a"
+      #print -nR $'\033]0;'$*$'\a'
+      #print -nR $'\033k'$1$'\033\\'
    fi
 }
 function precmd {
