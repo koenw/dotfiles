@@ -1,3 +1,6 @@
+pgrep -u "$USER" ssh-agent >/dev/null || ssh-agent > ~/.ssh-agent-env
+test -z "$SSH_AUTH_SOCK" && eval "$(<~/.ssh-agent-env)" >/dev/null
+
 function ssh() {
   keyLifeTime=2h
 
