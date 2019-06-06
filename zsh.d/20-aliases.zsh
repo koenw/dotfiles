@@ -4,8 +4,8 @@ else
   alias ls='ls -F'
 fi
 
-alias exa='exa -l --sort=modified --git'
 if which exa >/dev/null; then
+  alias exa='exa -l --sort=modified --git'
   alias ll='exa'
 else
   alias ll='ls -ltrh'
