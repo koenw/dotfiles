@@ -37,33 +37,9 @@
 [submodule "vim/bundle/vim-tmux-navigator"]
 	path = vim/bundle/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
-[submodule "vim/bundle/LanguageClient-neovim"]
-	path = vim/bundle/LanguageClient-neovim
-	url = https://github.com/autozimu/LanguageClient-neovim.git
 [submodule "vim/bundle/nvim-completion-manager"]
 	path = vim/bundle/nvim-completion-manager
 	url = https://github.com/roxma/nvim-completion-manager.git
 [submodule "vim/bundle/vim-airline-themes"]
 	path = vim/bundle/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
-[submodule "vim/bundle/tmuxline"]
-	path = vim/bundle/tmuxline
-	url = https://github.com/edkolev/tmuxline.vim.git
-[submodule "vim/bundle/ncm2"]
-	path = vim/bundle/ncm2
-	url = https://github.com/ncm2/ncm2.git
-[submodule "vim/bundle/nvim-yarp"]
-	path = vim/bundle/nvim-yarp
-	url = https://github.com/roxma/nvim-yarp.git
-[submodule "vim/bundle/ncm2-bufword"]
-	path = vim/bundle/ncm2-bufword
-	url = https://github.com/ncm2/ncm2-bufword.git
-[submodule "vim/bundle/ncm2-path"]
-	path = vim/bundle/ncm2-path
-	url = https://github.com/ncm2/ncm2-path.git
-[submodule "vim/bundle/ncm2-tmux"]
-	path = vim/bundle/ncm2-tmux
-	url = https://github.com/ncm2/ncm2-tmux.git
-[submodule "vim/bundle/ncm2-racer"]
-	path = vim/bundle/ncm2-racer
-	url = https://github.com/ncm2/ncm2-racer.git

@@ -100,7 +100,7 @@ if has("autocmd")
   autocmd FileType rust setlocal tabstop=4 shiftwidth=4 softtabstop=4
 
   " Enable ncm2 (completion framework) for all buffers
-  autocmd BufEnter * call ncm2#enable_for_buffer()
+  "autocmd BufEnter * call ncm2#enable_for_buffer()
 endif
 
 " ncm2 (completion framework)
