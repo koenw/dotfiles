@@ -12,7 +12,7 @@ pgrep unclutter &> /dev/null || unclutter &> /dev/null &
 
 xmodmap ~/.Xmodmap &
 
-xset s 600 610
+xset s 600 630
 xss-lock -n ~/.bin/fade-to-lock.sh -- i3lock -c 000000 &
 
 exec awesome
