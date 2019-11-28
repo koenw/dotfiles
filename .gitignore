@@ -6,3 +6,4 @@ vim/.netrwhist
 vim/view
 zsh.d/*.zsh
 ssh
+backup

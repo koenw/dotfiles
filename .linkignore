@@ -1,0 +1,6 @@
+LICENSE
+create_symlinks.sh
+link.sh
+config
+backup/?.*
+README.md
