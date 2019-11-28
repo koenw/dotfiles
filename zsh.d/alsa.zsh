@@ -1,1 +1,0 @@
-ALSA_CARD=PCH
