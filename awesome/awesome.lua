@@ -309,6 +309,12 @@ globalkeys = awful.util.table.join(
     awful.key({}, "XF86AudioPrev",        function () awful.util.spawn("mpc prev") end),
     awful.key({}, "Print",                function () awful.util.spawn("scrot -s -e 'mv $f ~/media/screenshots/'") end),
 
+    -- Screen rotation
+    awful.key({modkey, "Control"}, "Up",    function () awful.util.spawn("xrandr --output eDP1 --rotate normal") end),
+    awful.key({modkey, "Control"}, "Down",  function () awful.util.spawn("xrandr --output eDP1 --rotate inverted") end),
+    awful.key({modkey, "Control"}, "Left",  function () awful.util.spawn("xrandr --output eDP1 --rotate left") end),
+    awful.key({modkey, "Control"}, "Right", function () awful.util.spawn("xrandr --output eDP1 --rotate right") end),
+
     -- Screen lock
     awful.key({ "Control", "Mod1" }, "l",     function () awful.util.spawn("i3lock -c 000000")    end),
 
