@@ -10,7 +10,13 @@ fi
 # }}}
 
 # {{{ ENVIRONMENT
-export EDITOR=nvim
+if which nvim >/dev/null; then
+  export EDITOR=nvim
+elif which vim >/dev/null; then
+  export EDITOR=vim
+else
+  export EDITOR=vi
+fi
 export VISUAL=$EDITOR
 export PAGER=less
 # }}}
