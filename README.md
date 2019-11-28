@@ -14,9 +14,11 @@ to `zsh.d` in this repo. Lines in `.linkignore` are matched by (grep) regex.
 If a file or directory is already present where we want to create our symlink,
 it is moved to a backup directory in the repo root.
 
+```
 Usage: ./link.sh [options]
 
 Options:
 -h, --help     Print this message and exit
 -v, --verbose  Be more verbose
 -d, --debug    Print debugging info
+```
