@@ -191,8 +191,18 @@ awful.screen.connect_for_each_screen(function(s)
     -- Each screen has its own tag table.
     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" }, s, awful.layout.layouts[1])
 
-    -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
+    -- Create a promptbox for each screen I want to execute through zsh, so
+    -- I've got aliases and firejail and stuff. The `with_shell` option seems
+    -- broken though, hence the workaround with the exe_callback that uses
+    -- `awful.spawn.with_shell` instead of `awful.spawn`.
+    s.mypromptbox = awful.widget.prompt { prompt="run: ", exe_callback = function(...)
+      local result = awful.spawn.with_shell(...)
+      if type(result) == "string" then
+        self.widget:set_text(result)
+      end
+    end
+    }
+
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
