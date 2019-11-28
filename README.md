@@ -12,7 +12,7 @@ prepended to the link name. E.g. a symlink would be created from `$HOME.zsh.d`
 to `zsh.d` in this repo. Lines in `.linkignore` are matched by (grep) regex.
 
 If a file or directory is already present where we want to create our symlink,
-it is moved to the 'backup' directory.
+it is moved to a backup directory in the repo root.
 
 Usage: ./link.sh [options]
 
