@@ -76,6 +76,7 @@ bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 bindkey '^U' kill-whole-line # kill from cursor to BOL
 bindkey '^K' kill-line # kill from cursor to EOL
+bindkey '^Y' yank # Yank the last killed item back from the stack
 bindkey -M vicmd '^E' end-of-line
 bindkey -M vicmd '^A' beginning-of-line
 bindkey -M viins '^R' history-incremental-pattern-search-backward
