@@ -4,3 +4,4 @@ link.sh
 config
 backup/?.*
 README.md
+gnupg
