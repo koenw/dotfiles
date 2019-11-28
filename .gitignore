@@ -3,6 +3,6 @@ vim/backup
 vim/undo
 vim/tmp
 vim/.netrwhist
+vim/view
 zsh.d/*.zsh
-
 ssh
