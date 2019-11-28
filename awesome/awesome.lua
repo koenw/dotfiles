@@ -373,14 +373,22 @@ globalkeys = awful.util.table.join(
             c:move_to_tag(c.screen.tags[1])
           elseif c.class == "URxvt" then
             c:move_to_tag(c.screen.tags[1])
-          elseif c.class == "Firefox" then
+          elseif c.name:match(".*YouTube -.* Firefox") then
+            c:move_to_tag(c.screen.tags[3])
+          elseif c.name:match(".*Netflix -.* Firefox") then
+            c:move_to_tag(c.screen.tags[3])
+          elseif c.name:match("Netflix - Mozilla Firefox") then
+            c:move_to_tag(c.screen.tags[3])
+          elseif c.name:match("Slack .* Firefox") then
+            c:tags({c.screen.tags[7], c.screen.tags[10]})
+          elseif c.class == "firefox" then
             c:tags({c.screen.tags[2], c.screen.tags[10]})
           elseif c.class == "Spotify" then
             c:move_to_tag(c.screen.tags[8])
           elseif c.class == "Chromium" then
             c:move_to_tag(c.screen.tags[3])
-          elseif c.class == "HipChat" then
-            c:tags({c.screen.tags[7], c.screen.tags[10]})
+          elseif c.class == "Pavucontrol" then
+            c:tags({c.screen.tags[5]})
           elseif c.class == "Riot" then
             c:tags({c.screen.tags[9], c.screen.tags[10]})
           else
