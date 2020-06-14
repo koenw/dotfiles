@@ -29,7 +29,11 @@ export PAGER=less
 # }}}
 
 # {{{ Prompt & dircolors
-export PS1='%B%{[39m%}%n %{[39m%}%m%{[39m%}:%{[36m%}%2c%{[39m%} [%{[33m%}%h%{[39m%}%1(j.%{[30m%}%%%j%{[39m%}.)%0(?..:%{[31m%}%?%{[39m%})]%#%b '
+if [[ $UID = 0 ]]; then
+  export PS1='%B%{[31m%}%n %{[39m%}%m%{[39m%}:%{[36m%}%2c%{[39m%} [%{[33m%}%h%{[39m%}%1(j.%{[30m%}%%%j%{[39m%}.)%0(?..:%{[31m%}%?%{[39m%})]%#%b '
+else
+  export PS1='%B%{[39m%}%n %{[39m%}%m%{[39m%}:%{[36m%}%2c%{[39m%} [%{[33m%}%h%{[39m%}%1(j.%{[30m%}%%%j%{[39m%}.)%0(?..:%{[31m%}%?%{[39m%})]%#%b '
+fi
 
 if [[ -x `which dircolors` ]]; then
   eval `dircolors -b ~/.config/dircolors`   # sets LSCOLORS
