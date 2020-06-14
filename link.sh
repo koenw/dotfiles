@@ -68,6 +68,7 @@ function process_root() {
 # so, backing it up.
 function create_symlink() {
   local target=$1
+  local target_dir=$(dirname $target)
   local name=$2
   local backup_dir="${REPO}/backup/${TIMESTAMP}"
 
@@ -87,6 +88,7 @@ function create_symlink() {
     rm "$name"
   fi
 
+  mkdir -p "$target_dir"
   echo ln -s "$target" "$name"
   ln -s "$target" "$name"
 }
