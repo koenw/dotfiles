@@ -9,6 +9,13 @@ if [[ -x $(which startx) ]] && [[ $(tty) = /dev/tty1 ]] && [[ ! $UID = 0 ]]; the
 fi
 # }}}
 
+# {{{ Autostart wayland (sway)
+if [[ -x $(which sway) ]] && [[ $(tty) = /dev/tty1 ]] && [[ ! $UID = 0 ]]; then
+  sway
+  logout
+fi
+# }}}
+
 # {{{ ENVIRONMENT
 if which nvim >/dev/null; then
   export EDITOR=nvim
