@@ -68,8 +68,8 @@ function process_root() {
 # so, backing it up.
 function create_symlink() {
   local target=$1
-  local target_dir=$(dirname $target)
   local name=$2
+  local dir=$(dirname $name)
   local backup_dir="${REPO}/backup/${TIMESTAMP}"
 
   # If the target is also a symlink, resolve it first to prevent
@@ -88,7 +88,7 @@ function create_symlink() {
     rm "$name"
   fi
 
-  mkdir -p "$target_dir"
+  mkdir -p "$dir"
   echo ln -s "$target" "$name"
   ln -s "$target" "$name"
 }
