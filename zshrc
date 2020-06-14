@@ -3,7 +3,7 @@
 #
 
 # {{{ Autostart X
-if [[ -x /usr/bin/startx ]] && [[ $(tty) = /dev/tty1 ]] && [[ ! $UID = 0 ]]; then
+if [[ -x $(which startx) ]] && [[ $(tty) = /dev/tty1 ]] && [[ ! $UID = 0 ]]; then
   startx
   logout
 fi
