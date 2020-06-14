@@ -8,7 +8,7 @@ function ssh() {
     ssh-key-added "$key" || _ssh-add -t $keyLifeTime "$key"
   done
 
-  eval TERM=screen `/usr/bin/which ssh` $*
+  eval TERM=screen $(type -p ssh |awk '{print $3}') $*
 }
 
 # ssh-key-added takes the path to a ssh private key and checks if it's already
