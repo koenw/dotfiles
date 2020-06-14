@@ -1,1 +1,3 @@
-/usr/bin/firejail
+#!/usr/bin/env sh
+
+exec firejail $(basename $0) $*
