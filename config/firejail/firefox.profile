@@ -10,9 +10,9 @@ noblacklist ${HOME}/.cache/mozilla
 noblacklist ${HOME}/.mozilla
 
 mkdir ${HOME}/.cache/mozilla/firefox
-mkdir ${HOME}/mozilla
+mkdir ${HOME}/.mozilla
 whitelist ${HOME}/.cache/mozilla/firefox
-whitelist ${HOME}/mozilla
+whitelist ${HOME}/.mozilla
 
 whitelist ${HOME}/tmp/downloads
 
