@@ -32,12 +32,32 @@ function batteryInfo(adapter)
     if sta:match("Charging") then
       icon = "⚡"
       percent = "%"
+
+      if tonumber(battery) == 80 then
+        naughty.notify({ title    = "Battery charged to 80%, unplug charger?"
+               , text     = ""
+               , timeout  = 5
+               , position = "top_right"
+               , fg       = beautiful.fg_focus
+               , bg       = beautiful.bg_focus
+        })
+      end
     elseif sta:match("Discharging") then
       icon = ""
       percent = "%"
       if tonumber(battery) < 15 then
         naughty.notify({ title    = "Battery Warning"
                , text     = "Battery low!".."  "..battery..percent.."  ".."left!"
+               , timeout  = 5
+               , position = "top_right"
+               , fg       = beautiful.fg_focus
+               , bg       = beautiful.bg_focus
+        })
+      end
+
+      if tonumber(battery) == 40 then
+        naughty.notify({ title    = "Battery down to 40%, plug charger?"
+               , text     = ""
                , timeout  = 5
                , position = "top_right"
                , fg       = beautiful.fg_focus
