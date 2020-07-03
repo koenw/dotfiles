@@ -391,10 +391,10 @@ globalkeys = awful.util.table.join(
             c:move_to_tag(c.screen.tags[3])
           elseif c.name:match("Netflix - Mozilla Firefox") then
             c:move_to_tag(c.screen.tags[3])
-          elseif c.name:match("Slack .* Firefox") then
-            c:tags({c.screen.tags[7], c.screen.tags[10]})
-          elseif c.class == "firefox" then
+          elseif c.class == "Firefox" then
             c:tags({c.screen.tags[2], c.screen.tags[10]})
+          elseif c.class == "Slack" then
+            c:move_to_tag(c.screen.tags[7])
           elseif c.class == "Spotify" then
             c:move_to_tag(c.screen.tags[8])
           elseif c.class == "Chromium" then
