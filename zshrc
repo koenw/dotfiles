@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
 # vim: foldmethod=marker syntax=zsh
-#
+
+export PATH="${HOME}/.bin:$PATH"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_DATA_DIRS="${XDG_DATA_HOME}:${HOME}/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
 
 # {{{ Autostart X
 if [[ -x $(which startx) ]] && [[ $(tty) = /dev/tty1 ]] && [[ ! $UID = 0 ]]; then

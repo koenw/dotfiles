@@ -3,5 +3,4 @@ for dir in /usr/bin /usr/sbin /sbin /bin /usr/local/bin /usr/local/sbin; do
     PATH="${PATH}:${dir}"
   fi
 done
-PATH="${HOME}/.bin:$PATH"
 export PATH
