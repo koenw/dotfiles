@@ -1,4 +1,7 @@
 ! vim: foldmethod=marker
+!
+!
+Xft.dpi: 192
 !{{{ urxvt
 URxvt*depth: 32
 URxvt*scrollBar:false

@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+#
+# Configure 'Xft.dpi' in ~/.Xresources and restart some applications
+
+set -eu
+
+#step_size=96
+step_size=48
+
+# Applications to restart when we change the dpi
+applications=(firefox)
+
+usage() {
+  cat << EOF
+Configure 'Xft.dpi' in ~/.Xresources and restart some applications.
+
+Usage:  $0 (up|down)
+
+up:     Increase DPI (in multitudes of ${step_size}) and restart stuff
+down:   Decrease DPI (in multitudes of ${step_size}) and restart stuff
+EOF
+}
+
+# Get the current configured 'Xft.dpi` from ~/.Xresources.
+get-dpi() {
+  awk '/^\s*Xft.dpi:/ { print $2 }' ~/.Xresources
+}
+
+# Set `Xft.dpi` in ~/.Xresources to the given value.
+set-dpi() {
+  local target_dpi=$1
+  sed -i "s!^\(\s*Xft.dpi:\).*!\1 $target_dpi!" ~/.Xresources
+  xrdb -merge ~/.Xresources
+}
+
+# Get the pids for the given application.
+get-pids() {
+  local app=$1
+
+  if which firejail 2>&1 > /dev/null && firejail --list | awk -F: '{print $4}' |grep -q $app; then
+    firejail --list |awk -F: "/:firejail $app\s*\$/ {print \$1 }"
+  else
+    pgrep "$app"
+  fi
+
+}
+
+# Restart the given application
+restart() {
+  local app=$1
+  local pids=$(get-pids $app)
+
+  echo -n "Stopping $app..."
+  kill $pids
+  for i in $(seq 0 9); do
+    if (
+      for p in $pids; do
+        ps -q $p 2>&1 >/dev/null && exit 0
+      done
+      exit 1
+    ); then
+      echo -n " still running..."
+      sleep $i
+    else
+      # The application is properly stopped
+      echo " done! Starting..."
+      (
+        $app 2>&1 >/dev/null &
+        disown
+      ) 2>&1 >/dev/null
+      break
+    fi
+  done
+}
+
+# Restart all configured applications
+restart_all() {
+  for app in ${applications[@]}; do
+    restart $app
+  done
+}
+
+case $1 in
+  up)
+    current=$(get-dpi)
+    next=$(perl -MPOSIX=ceil -e "print ( (ceil($current/ ${step_size}) + 1) * ${step_size})")
+    set-dpi $next
+    restart_all
+  ;;
+  down)
+    current=$(get-dpi)
+    next=$(perl -MPOSIX=ceil -e "print ( (ceil($current/ ${step_size}) - 1) * ${step_size})")
+    set-dpi $next
+    restart_all
+  ;;
+  *)
+    usage
+    exit 1
+  ;;
+esac
