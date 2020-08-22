@@ -313,7 +313,7 @@ globalkeys = awful.util.table.join(
     awful.key({}, "XF86AudioPlay",        function () awful.util.spawn("mpc toggle") end),
     awful.key({}, "XF86AudioNext",        function () awful.util.spawn("mpc next") end),
     awful.key({}, "XF86AudioPrev",        function () awful.util.spawn("mpc prev") end),
-    awful.key({}, "Print",                function () awful.util.spawn("scrot -s -e 'mv $f ~/media/screenshots/'") end),
+    awful.key({}, "Print",                function () awful.util.spawn("scrot '%F_%T_$a.png' -e 'sh -c \"mkdir -p ~/media/screenshots && mv $f ~/media/screenshots\"'") end),
 
     -- Screen rotation
     awful.key({modkey, "Control"}, "Up",    function () awful.util.spawn("xrandr --output eDP1 --rotate normal") end),
