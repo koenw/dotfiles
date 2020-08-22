@@ -230,8 +230,8 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
-            mytextclock,
             batterywidget,
+            mytextclock,
             s.mylayoutbox,
         },
     }
@@ -622,7 +622,8 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 --
 -- {{ hooks
 batterywidget:set_text(batteryInfo("BAT0"))
-batterywidget_timer = timer({timeout = 30})
+--batterywidget_timer = timer({timeout = 30})
+batterywidget_timer = timer({timeout = 3})
 batterywidget_timer:connect_signal("timeout", function()
   batterywidget:set_text(batteryInfo("BAT0"))
 end)
