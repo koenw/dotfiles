@@ -1,10 +1,12 @@
 # Firejail profile for firefox
 
 # Persistent local custimizations
-include firefox.local
+#include firefox.local
+
+protocol unix,inet,inet6
 
 # Persistent global definitions
-include globals.local
+#include globals.local
 
 noblacklist ${HOME}/.cache/mozilla
 noblacklist ${HOME}/.mozilla
