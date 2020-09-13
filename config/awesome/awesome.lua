@@ -397,7 +397,7 @@ globalkeys = awful.util.table.join(
             c:move_to_tag(c.screen.tags[3])
           elseif c.class == "Pavucontrol" then
             c:tags({c.screen.tags[5]})
-          elseif c.class == "Riot" then
+          elseif c.class == "Element" then
             c:tags({c.screen.tags[9], c.screen.tags[10]})
           else
             c:move_to_tag(c.screen.tags[4])
