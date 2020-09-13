@@ -389,12 +389,12 @@ globalkeys = awful.util.table.join(
             c:move_to_tag(c.screen.tags[3])
           elseif c.class == "Firefox" then
             c:tags({c.screen.tags[2], c.screen.tags[10]})
+          elseif c.name:match(".* - Chromium") then
+            c:move_to_tag(c.screen.tags[6])
           elseif c.class == "Slack" then
             c:move_to_tag(c.screen.tags[7])
           elseif c.class == "Spotify" then
             c:move_to_tag(c.screen.tags[8])
-          elseif c.class == "Chromium" then
-            c:move_to_tag(c.screen.tags[3])
           elseif c.class == "Pavucontrol" then
             c:tags({c.screen.tags[5]})
           elseif c.class == "Element" then
