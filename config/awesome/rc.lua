@@ -16,7 +16,9 @@ end
 -- output:flush()
 -- output:close()
 
-dofile("/etc/xdg/awesome/rc.lua");
+-- dofile("/etc/xdg/awesome/rc.lua");
+-- TODO: Properly read XDG env vars & do something sensible.
+dofile("/run/current-system/sw/etc/xdg/awesome/rc.lua");
 
 for s = 1,screen.count() do
     mypromptbox[s].text = awful.util.escape(err:match("[^\n]*"));
