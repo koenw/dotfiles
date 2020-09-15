@@ -36,3 +36,5 @@ fi
 
 alias find='noglob find'
 alias git='noglob git'
+
+alias sudo='sudo --preserve-env=SSH_CLIENT,SSH_CONNECTION,SSH_TTY'
