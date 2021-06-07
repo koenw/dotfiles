@@ -26,10 +26,6 @@ elif which vim > /dev/null; then
   alias vi='vim'
 fi
 
-if which bat >/dev/null; then
-  alias cat='bat'
-fi
-
 if which jexec >/dev/null; then
   alias jexec='jexec -l'
 fi
