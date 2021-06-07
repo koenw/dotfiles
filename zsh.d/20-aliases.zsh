@@ -30,7 +30,22 @@ if which jexec >/dev/null; then
   alias jexec='jexec -l'
 fi
 
+if which docker >/dev/null; then
+  docker_member=false
+  for g in $(groups); do
+    if test "$g" = "docker"; then
+      docker_member=true
+      break
+    fi
+  done
+  $docker_member || alias docker='sudo docker'
+fi
+
 alias find='noglob find'
 alias git='noglob git'
+alias py='python3'
 
+# Facilitate a pretty, sudo-aware shell prompt by exposing some env vars.
 alias sudo='sudo --preserve-env=SSH_CLIENT,SSH_CONNECTION,SSH_TTY'
+
+alias yt-dl='docker run --rm -i -e PGID=$(id -g) -e PUID=$(id -u) -v "$(pwd)":/workdir:rw mikenye/youtube-dl'
