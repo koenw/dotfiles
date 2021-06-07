@@ -71,8 +71,8 @@ zstyle ':completion:*:match:*' original only
 
 # {{{ history
 export HISTFILE=~/.zsh_history
-export HISTSIZE=10000
-export SAVEHIST=10000
+export HISTSIZE=100000
+export SAVEHIST=1000000000000000000
 
 setopt inc_append_history
 setopt extended_history  # mainly save time details
@@ -95,6 +95,7 @@ bindkey '^L' push-line
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 bindkey '^U' kill-whole-line # kill from cursor to BOL
+# TODO: '^K' conflicts with tmux panel switching
 bindkey '^K' kill-line # kill from cursor to EOL
 bindkey '^Y' yank # Yank the last killed item back from the stack
 bindkey -M vicmd '^E' end-of-line
