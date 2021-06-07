@@ -62,11 +62,11 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.corner.nw,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
+    awful.layout.suit.corner.nw,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral,
@@ -94,6 +94,7 @@ local function client_menu_toggle_fn()
         end
     end
 end
+
 -- }}}
 
 -- {{{ Menu
@@ -166,6 +167,56 @@ local tasklist_buttons = awful.util.table.join(
                                               awful.client.focus.byidx(-1)
                                           end))
 
+local function sort_clients()
+  for _, c in ipairs(client.get()) do
+    repeat
+      if c.minimized then
+        do break end
+      end
+
+      if c.class == "Alacritty" then
+        c:move_to_tag(c.screen.tags[1])
+      elseif c.class == "Termite" then
+        c:move_to_tag(c.screen.tags[1])
+      elseif c.class == "URxvt" then
+        c:move_to_tag(c.screen.tags[1])
+      elseif c.name:match(".*YouTube -.* Firefox") then
+        if c.first_tag == 6 then
+          break
+        end
+        c:move_to_tag(c.screen.tags[3])
+      elseif c.name:match(".*Netflix -.* Firefox") then
+        if c.first_tag == 6 then
+          break
+        end
+        c:move_to_tag(c.screen.tags[3])
+      elseif c.name:match("Netflix - Mozilla Firefox") then
+        if c.first_tag == 6 then
+          break
+        end
+        c:move_to_tag(c.screen.tags[3])
+      elseif c.class == "Firefox" then
+        if c.first_tag == 6 then
+          break
+        end
+        c:tags({c.screen.tags[2], c.screen.tags[10]})
+      elseif c.name:match(".* - Chromium") then
+        c:move_to_tag(c.screen.tags[6])
+      elseif c.class == "Slack" then
+        c:move_to_tag(c.screen.tags[7])
+      elseif c.class == "Spotify" then
+        c:move_to_tag(c.screen.tags[8])
+      elseif c.class == "Pavucontrol" then
+        c:tags({c.screen.tags[5]})
+      elseif c.class == "Element" then
+        c:tags({c.screen.tags[9], c.screen.tags[10]})
+      else
+        c:move_to_tag(c.screen.tags[4])
+      end
+    until true
+  end
+end
+
 local function set_wallpaper(s)
     -- Wallpaper
     if beautiful.wallpaper then
@@ -215,14 +266,15 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.bigbar = awful.wibar({ position = "bottom", screen = s, visible = false })
 
     -- Add widgets to the wibox
-    s.mywibox:setup {
+    s.bigbar:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            --mylauncher,
+            s.mylayoutbox,
             s.mytaglist,
             s.mypromptbox,
         },
@@ -232,7 +284,6 @@ awful.screen.connect_for_each_screen(function(s)
             wibox.widget.systray(),
             batterywidget,
             mytextclock,
-            s.mylayoutbox,
         },
     }
 end)
@@ -246,6 +297,7 @@ root.buttons(awful.util.table.join(
 ))
 -- }}}
 
+local volume_notify = { id = 123 }
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
@@ -283,14 +335,6 @@ globalkeys = awful.util.table.join(
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
-    awful.key({ modkey,           }, "Tab",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
-        end,
-        {description = "go back", group = "client"}),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
@@ -301,15 +345,36 @@ globalkeys = awful.util.table.join(
               {description = "quit awesome", group = "awesome"}),
 
     -- Display Brightness
-    awful.key({}, "XF86MonBrightnessUp",  function () awful.util.spawn("light -A 5") end),
-    awful.key({}, "XF86MonBrightnessDown",function () awful.util.spawn("light -U 5") end),
+    awful.key({}, "XF86MonBrightnessUp",  function () awful.util.spawn("light -A 1.5") end),
+    awful.key({}, "XF86MonBrightnessDown",function () awful.util.spawn("light -U 1.5") end),
 
     -- Media
-    awful.key({modkey, },         "#108", function () awful.util.spawn("amixer sset Master 1%-") end),
-    awful.key({modkey, },         "#103", function () awful.util.spawn("amixer sset Master 1%+") end),
-    awful.key({}, "XF86AudioLowerVolume", function () awful.util.spawn("amixer sset Master 1%-") end),
-    awful.key({}, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer sset Master 1%+") end),
-    awful.key({}, "XF86AudioMute",        function () awful.util.spawn("amixer sset Master toggle") end),
+    awful.key({}, "XF86AudioLowerVolume", function ()
+      awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@ -2%")
+      volume_notify = naughty.notify({ preset = naughty.config.presets.low,
+                      timeout = 1,
+                      replaces_id = volume_notify.id,
+                      text = "🔉" })
+    end),
+    awful.key({}, "XF86AudioRaiseVolume", function ()
+      awful.util.spawn("pactl set-sink-volume @DEFAULT_SINK@ +2%")
+      volume_notify = naughty.notify({ preset = naughty.config.presets.low,
+                      timeout = 1,
+                      replaces_id = volume_notify.id,
+                       text = "🔊" })
+    end),
+    awful.key({}, "XF86AudioMute",        function ()
+      awful.util.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")
+      volume_notify = naughty.notify({ preset = naughty.config.presets.low,
+                      timeout = 1,
+                      replaces_id = volume_notify.id,
+                       text = "🔇" })
+    end),
+    awful.key({}, "XF86AudioMicMute",     function ()
+      awful.util.spawn("pactl set-source-mute @DEFAULT_SOURCE@ toggle")
+      naughty.notify({ preset = naughty.config.presets.low,
+                       text = "🎙️" })
+    end),
     awful.key({}, "XF86AudioPlay",        function () awful.util.spawn("mpc toggle") end),
     awful.key({}, "XF86AudioNext",        function () awful.util.spawn("mpc next") end),
     awful.key({}, "XF86AudioPrev",        function () awful.util.spawn("mpc prev") end),
@@ -320,6 +385,18 @@ globalkeys = awful.util.table.join(
     awful.key({modkey, "Control"}, "Down",  function () awful.util.spawn("xrandr --output eDP1 --rotate inverted") end),
     awful.key({modkey, "Control"}, "Left",  function () awful.util.spawn("xrandr --output eDP1 --rotate left") end),
     awful.key({modkey, "Control"}, "Right", function () awful.util.spawn("xrandr --output eDP1 --rotate right") end),
+
+    -- Laptop screen toggle
+    awful.key({}, "XF86Display",          function ()
+      awful.util.spawn("sh -c  '\
+        if xrandr --current |grep -qE \"^eDP-1 connected primary [0-9]\"; then \
+          xrandr --output eDP-1 --off; \
+        else \
+          xrandr --output eDP-1 --auto; \
+        fi \
+      '")
+      sort_clients()
+    end),
 
     -- Screen lock
     awful.key({ "Control", "Mod1" }, "l",     function () awful.util.spawn("i3lock -c 000000")    end),
@@ -371,39 +448,24 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"}),
 
+    -- toggle wibar visibility
+    awful.key({ modkey,           }, "Tab", function ()
+      if awful.screen.focused().bigbar.visible then
+        awful.screen.focused().bigbar.visible = false
+      else
+        awful.screen.focused().bigbar.visible = true
+      end
+    end),
+
     -- sort clients
-    awful.key({ modkey, "Control" }, "s",
-      function ()
-        for _, c in ipairs(client.get()) do
-          if c.class == "Alacritty" then
-            c:move_to_tag(c.screen.tags[1])
-          elseif c.class == "Termite" then
-            c:move_to_tag(c.screen.tags[1])
-          elseif c.class == "URxvt" then
-            c:move_to_tag(c.screen.tags[1])
-          elseif c.name:match(".*YouTube -.* Firefox") then
-            c:move_to_tag(c.screen.tags[3])
-          elseif c.name:match(".*Netflix -.* Firefox") then
-            c:move_to_tag(c.screen.tags[3])
-          elseif c.name:match("Netflix - Mozilla Firefox") then
-            c:move_to_tag(c.screen.tags[3])
-          elseif c.class == "Firefox" then
-            c:tags({c.screen.tags[2], c.screen.tags[10]})
-          elseif c.name:match(".* - Chromium") then
-            c:move_to_tag(c.screen.tags[6])
-          elseif c.class == "Slack" then
-            c:move_to_tag(c.screen.tags[7])
-          elseif c.class == "Spotify" then
-            c:move_to_tag(c.screen.tags[8])
-          elseif c.class == "Pavucontrol" then
-            c:tags({c.screen.tags[5]})
-          elseif c.class == "Element" then
-            c:tags({c.screen.tags[9], c.screen.tags[10]})
-          else
-            c:move_to_tag(c.screen.tags[4])
-          end
-        end
-      end)
+    awful.key({ modkey, "Control" }, "s", sort_clients)
+
+--    awful.key({ modkey, "Shift" }, "s",
+--      function()
+--        for _, c in ipairs(client.get()) do
+--        end
+--      end
+--    )
 )
 
 clientkeys = awful.util.table.join(
@@ -503,6 +565,7 @@ awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
       properties = { --border_width = beautiful.border_width,
+                     --border_width = 2,
                      border_width = 0,
                      border_color = beautiful.border_normal,
                      focus = awful.client.focus.filter,
