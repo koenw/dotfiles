@@ -1,0 +1,9 @@
+ServerAliveInterval 30
+PasswordAuthentication=no
+AddKeysToAgent=yes
+VerifyHostKeyDNS=ask
+CanonicalizeHostname=yes
+CanonicalDomains=koenw.dev
+
+# Project-specific configs
+Include *.conf
