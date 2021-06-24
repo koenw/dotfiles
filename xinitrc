@@ -10,6 +10,9 @@ pgrep redshift &> /dev/null || redshift -t 6500:3500 &> /dev/null &
 
 pgrep unclutter &> /dev/null || unclutter &> /dev/null &
 
+pasystray &> /dev/null &
+blueberry-tray &> /dev/null &
+
 xmodmap ~/.Xmodmap &
 
 xset s 600 630
