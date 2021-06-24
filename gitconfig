@@ -11,3 +11,4 @@
   d = diff
   b = branch -a
   r = remote -v
+  praise = blame
