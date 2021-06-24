@@ -93,6 +93,14 @@ case $1 in
     set-dpi $next
     restart_all
   ;;
+  laptop)
+    set-dpi 96
+    restart_all
+  ;;
+  big)
+    set-dpi 144
+    restart_all
+  ;;
   *)
     usage
     exit 1
