@@ -1,6 +1,6 @@
 ---
 font:
-  size: 8.5
+  size: 13
 
 schemes:
   zenburn: &zenburn
@@ -31,5 +31,54 @@ schemes:
     selection:
       background: '#21322f'
       text: '#c2d87a'
+  kwenie: &kwenie # based on zenburn and spacecookie
+    primary:
+      background: '#3c3c3c'
+      foreground: '#efefef'
+    cursor:
+      cursor: '#a09f94'
+    selection:
+      background: '#21322f'
+      text: '#dcdccc'
+    normal:
+      black:  '#3c3c3c'
+      blue:   '#6997c8'
+      cyan:   '#6ccaca'
+      green:    '#99cb9b'
+      magenta:  '#ca98c9'
+      red:      '#ef787b'
+      white:    '#f1f0ec'
+      yellow:   '#fdcb71'
+    bright:
+      black: '#709080'
+      blue: '#94bff3'
+      cyan: '#93e0e3'
+      green: '#c3bf9f'
+      magenta: '#ec93d3'
+      red: '#dca3a3'
+      white: '#ffffff'
+      yellow: '#e0cf9f'
+  tender: &tender # github.com/huyvohcmc/tender-alacritty
+    primary:
+      background: '#282828'
+      foreground: '#eeeeee'
+    normal:
+      black:   '#282828'
+      red:     '#f43753'
+      green:   '#c9d05c'
+      yellow:  '#ffc24b'
+      blue:    '#b3deef'
+      magenta: '#d3b987'
+      cyan:    '#73cef4'
+      white:   '#eeeeee'
+    bright:
+      black:   '#4c4c4c'
+      red:     '#f43753'
+      green:   '#c9d05c'
+      yellow:  '#ffc24b'
+      blue:    '#b3deef'
+      magenta: '#d3b987'
+      cyan:    '#73cef4'
+      white:   '#feffff'
 
-colors: *zenburn
+colors: *tender
