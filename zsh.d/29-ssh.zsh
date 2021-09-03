@@ -10,7 +10,6 @@ function ssh() {
 
   for key in $keys_to_add; do
     if ! echo -e $added_keys | grep -q "$key"; then
-      # Just add all the keys
       for key in ~/.ssh/id_*~*(.pub|.sh); do
         ssh-key-added "$key" || _ssh-add -t $keyLifeTime "$key"
       done
@@ -33,5 +32,5 @@ function _ssh-add {
   local key=${@: -1}
   local askpass="${key}.sh"
   test -x "$askpass" || return 1
-  cat /dev/null | SSH_ASKPASS="$askpass" ssh-add $*
+  cat /dev/null | SSH_ASKPASS="$askpass" SSH_ASKPASS_REQUIRE=force ssh-add $*
 }
