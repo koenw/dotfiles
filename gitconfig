@@ -6,7 +6,7 @@
   ui = true
 
 [alias]
-  l = log --graph --decorate --all
+  l = log --graph --decorate --all --date=relative
   s = status -sb
   d = diff
   b = branch -a
