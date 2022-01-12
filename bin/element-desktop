@@ -1,1 +1,4 @@
-firejailed
+#!/usr/bin/env sh
+
+#exec firejail $(basename $0) --enable-features=UseOzonePlatform --ozone-platform=wayland --in-process-gpu "--proxy-server=socks5://localhost:9050" --host-resolver-rules="MAP * 0.0.0.0 , EXCLUDE localhost" $*
+exec firejail $(basename $0) --enable-features=UseOzonePlatform --ozone-platform=wayland --in-process-gpu $*

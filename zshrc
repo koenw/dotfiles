@@ -4,17 +4,18 @@
 export PATH="${HOME}/.bin:$PATH"
 export XDG_DATA_HOME="${HOME}/.local/share"
 export XDG_DATA_DIRS="${XDG_DATA_HOME}:${HOME}/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
-
-# {{{ Autostart X
-if [[ -x $(which startx) ]] && [[ $(tty) = /dev/tty1 ]] && [[ ! $UID = 0 ]]; then
-  startx
-  logout
-fi
-# }}}
+MOZ_DBUS_REMOTE=1
 
 # {{{ Autostart wayland (sway)
 if [[ -x $(which sway) ]] && [[ $(tty) = /dev/tty1 ]] && [[ ! $UID = 0 ]]; then
   sway
+  logout
+fi
+# }}}
+
+# {{{ Autostart X
+if [[ -x $(which startx) ]] && [[ $(tty) = /dev/tty1 ]] && [[ ! $UID = 0 ]]; then
+  startx
   logout
 fi
 # }}}

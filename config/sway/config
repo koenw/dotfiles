@@ -1,123 +1,118 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
-
-### Variables
-#
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
+
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
+
+#xwayland disable
+
 set $term alacritty
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $launcher wofi --show drun --allow-images --gtk-dark | xargs swaymsg exec --
+set $lock swaylock -f swaylock -c 000000 --image ~/.config/awesome/themes/wallpaper.png --indicator-caps-lock --indicator-radius=100
+set $wobsock $XDG_RUNTIME_DIR/wob.sock
+set $woblock $XDG_RUNTIME_DIR/wob.lock
+set $wobsock_laptop $XDG_RUNTIME_DIR/wob_laptop.sock
+set $woblock_laptop $XDG_RUNTIME_DIR/wob_laptop.lock
 
-### Output configuration
-#
-# Default wallpaper
-#output * bg ~/.config/sway/backgrounds/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+output * bg ~/.config/sway/wallpapers/wallpaper fill
 
-### Idle configuration
-#
-# Example configuration:
-#
+
+smart_borders no_gaps
+smart_gaps on
+default_border pixel 2
+#default_border none
+
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
-         timeout 300 'swaylock -c 000000 --image ~/.config/awesome/themes/wallpaper.png --indicator-caps-lock --indicator-radius=100' \
-         timeout 600 'swaymsg "output * dpms off"' \
-              resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
+  timeout 6000 $lock \
+  timeout 6600 'swaymsg "output * dpms off"' \
+  resume 'swaymsg "output * dpms on"' \
+  before-sleep 'swaylock -f -c 000000'
 
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
+exec --no-startup-id flashfocus
+exec wlsunset -l 52.09157204738723 -L 5.051661491039833
+exec_always sh -c "(test -e $wobsock || mkfifo $wobsock); tail -f $wobsock | wob --bar-color '#99FFFFFF' --background-color '#99000000' --border 0 --padding 0"
+exec_always sh -c "(test -e $wobsock_laptop || mkfifo $wobsock_laptop); tail -f $wobsock_laptop | wob --output eDP-1 --bar-color '#99FFFFFF' --background-color '#99000000' --border 0 --padding 0"
 
 input type:keyboard {
-  xkb_options caps:escape
+  xkb_options caps:escape,eurosign:5
+  xkb_layout "us"
+  xkb_variant "altgr-intl"
 }
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
 
-### Key bindings
+input type:touchpad {
+  middle_emulation disabled
+}
+
+# Start a terminal
+bindsym $mod+Return exec $term
+
+# Kill focused window
+bindsym $mod+w kill
+
+# Start your launcher
+bindsym $mod+space exec $launcher
+bindsym $mod+p exec $launcher
+
+# Reload the configuration file
+bindsym $mod+Shift+r reload
+
+# Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+# Lock the screen
+bindsym alt+ctrl+l exec $lock
+
 #
-# Basics:
-#
-    # Start a terminal
-    bindsym $mod+Return exec $term
+# Media
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
-    # Kill focused window
-    bindsym $mod+Shift+q kill
-    #bindsym $mod+w kill
+bindsym --locked XF86MonBrightnessUp exec light -A 1% && light -G | cut -d'.' -f1 > $wobsock_laptop
+bindsym --locked XF86MonBrightnessDown exec light -U 1% && light -G |cut -d'.' -f1 > $wobsock_laptop
 
-    # Start your launcher
-    #bindsym $mod+d exec $menu
-    bindsym $mod+p exec $menu
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1% && pamixer --get-volume > $wobsock
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1% && pamixer --get-volume > $wobsock
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && ( pamixer --get-mute && echo 0 > $wobsock || pamixer --get-volume > $wobsock )
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
+# Grab a screenshot from the focused window
+bindsym Print exec grim -g "$(swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | wl-copy -p -t image/png
+bindsym Print+ctrl exec grim -g "$(swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')" ~/media/screenshots/$(date '+%Y-%m-%d_%H_%M_%S')_$(hostname).png
+# Select a region and screenshoot it
+bindsym Print+Shift exec grim -g "$(slurp)" - | wl-copy -t image/png
+bindsym Print+Shift+ctrl exec grim -g "$(slurp)" - | ~/media/screenshots/$(date '+%Y-%m-%d_%H_%M_%S')_$(hostname).png
 
-    # Reload the configuration file
-    bindsym $mod+Shift+c reload
+mouse_warping output
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
-#
-# Moving around:
-#
-    # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
+bindsym $mod+ctrl+j focus prev
+bindsym $mod+ctrl+k focus next
 
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+o focus output right
+bindsym $mod+shift+o move workspace output right; focus output right
+
+
 #
 # Workspaces:
 #
+
+#workspace term output eDP-1
+#assign [app_id="term"] workspace term
+#exec $term --class term
+
     # Switch to workspace
     bindsym $mod+1 workspace 1
     bindsym $mod+2 workspace 2
@@ -128,7 +123,7 @@ input type:keyboard {
     bindsym $mod+7 workspace 7
     bindsym $mod+8 workspace 8
     bindsym $mod+9 workspace 9
-    bindsym $mod+0 workspace 10
+    bindsym $mod+0 workspace term
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace 1
     bindsym $mod+Shift+2 move container to workspace 2
@@ -139,7 +134,7 @@ input type:keyboard {
     bindsym $mod+Shift+7 move container to workspace 7
     bindsym $mod+Shift+8 move container to workspace 8
     bindsym $mod+Shift+9 move container to workspace 9
-    bindsym $mod+Shift+0 move container to workspace 10
+    bindsym $mod+Shift+0 move container to workspace term
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -161,23 +156,31 @@ input type:keyboard {
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
 
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+    bindsym $mod+control+space focus mode_toggle
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
-#
-# Scratchpad:
-#
+
+  #
+  # Scratchpad:
+  #
     # Sway has a "scratchpad", which is a bag of holding for windows.
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+    bindsym $mod+Shift+n move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+    bindsym $mod+n scratchpad show
 #
 # Resizing containers:
 #
@@ -203,20 +206,6 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
+  swaybar_command waybar
 }
