@@ -13,3 +13,6 @@
   r = remote -v
   ls = ls-files
   praise = blame
+
+[init]
+	defaultBranch = master
