@@ -49,3 +49,5 @@ alias py='python3'
 alias sudo='sudo --preserve-env=SSH_CLIENT,SSH_CONNECTION,SSH_TTY'
 
 alias yt-dl='docker run --rm -i -e PGID=$(id -g) -e PUID=$(id -u) -v "$(pwd)":/workdir:rw mikenye/youtube-dl'
+
+function mkalbum() {mkdir "$(date +%Y%m%d)_${1}"}
