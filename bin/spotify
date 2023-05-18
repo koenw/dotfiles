@@ -1,1 +1,3 @@
-firejailed
+#!/usr/bin/env sh
+
+exec firejail --profile=spotify $(readlink /run/current-system/sw/bin/$(basename $0)) $*
