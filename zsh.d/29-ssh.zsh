@@ -1,6 +1,6 @@
 # Start ssh-agent if it's not running yet
 pgrep -u "$USER" ssh-agent >/dev/null || ssh-agent > ~/.ssh-agent-env
-test -z "$SSH_AUTH_SOCK" && eval "$(<~/.ssh-agent-env)" >/dev/null
+eval "$(<~/.ssh-agent-env)" >/dev/null
 
 # This wrapper will make sure my favourite ssh keys are loaded.
 function ssh() {
