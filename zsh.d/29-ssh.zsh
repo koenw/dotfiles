@@ -5,7 +5,7 @@ test -z "$SSH_AUTH_SOCK" && eval "$(<~/.ssh-agent-env)" >/dev/null
 # This wrapper will make sure my favourite ssh keys are loaded.
 function ssh() {
   local keyLifeTime=2h
-  local keys_to_add=(koen@carb koen@koendalini)
+  local keys_to_add=(koen@carb)
   local added_keys=$(ssh-add -l |awk '{print $3}')
 
   for key in $keys_to_add; do
