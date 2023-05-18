@@ -36,6 +36,10 @@ exec wlsunset -l 52.09157204738723 -L 5.051661491039833
 exec_always sh -c "(test -e $wobsock || mkfifo $wobsock); tail -f $wobsock | wob --bar-color '#99FFFFFF' --background-color '#99000000' --border 0 --padding 0"
 exec_always sh -c "(test -e $wobsock_laptop || mkfifo $wobsock_laptop); tail -f $wobsock_laptop | wob --output eDP-1 --bar-color '#99FFFFFF' --background-color '#99000000' --border 0 --padding 0"
 
+exec --no-startup-id fcitx5 -d
+
+#exec_always ibus-daemon --xim --restart --replace
+
 input type:keyboard {
   xkb_options caps:escape,eurosign:5
   xkb_layout "us"

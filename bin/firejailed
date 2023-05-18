@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 
 export MOZ_ENABLE_WAYLAND=1 # Force wayland for firefox
-exec firejail $(basename $0) $*
+exec firejail --profile=custom-firefox $(readlink /run/current-system/sw/bin/$(basename $0)) $*

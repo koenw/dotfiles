@@ -4,6 +4,12 @@
 export PATH="${HOME}/.bin:$PATH"
 export XDG_DATA_HOME="${HOME}/.local/share"
 export XDG_DATA_DIRS="${XDG_DATA_HOME}:${HOME}/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
+#export GTK_IM_MODULE=ibus
+#export XMODIFIERS=@im=ibus
+#export QT_IM_MODULE=ibus
+GTK_IM_MODULE=wayland
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
 MOZ_DBUS_REMOTE=1
 
 # {{{ Autostart wayland (sway)
