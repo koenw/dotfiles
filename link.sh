@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 #
 # Create symlinks from the various location in $HOME to the corresponding files
 # and directories in this repo.
