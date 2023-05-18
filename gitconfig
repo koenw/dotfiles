@@ -19,4 +19,4 @@
   praise = blame
 
 [init]
-	defaultBranch = master
+  defaultBranch = master

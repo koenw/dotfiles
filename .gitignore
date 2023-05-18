@@ -8,3 +8,5 @@ ssh
 backup
 gnupg
 config/mpv/watch_later
+config/systemd
+bin

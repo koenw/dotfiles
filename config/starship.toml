@@ -3,6 +3,3 @@ scan_timeout = 5
 
 [python]
 symbol = "🐍 "
-
-#[package]
-#disabled = true
