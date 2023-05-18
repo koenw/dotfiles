@@ -11,7 +11,7 @@ set $right l
 
 set $term alacritty
 set $launcher wofi --show drun --allow-images --gtk-dark | xargs swaymsg exec --
-set $lock swaylock -f swaylock -c 000000 --image ~/.config/awesome/themes/wallpaper.png --indicator-caps-lock --indicator-radius=100
+set $lock swaylock -f -c 000000 --image ~/.config/sway/wallpapers/wallpaper --indicator-caps-lock --indicator-radius=100
 set $wobsock $XDG_RUNTIME_DIR/wob.sock
 set $woblock $XDG_RUNTIME_DIR/wob.lock
 set $wobsock_laptop $XDG_RUNTIME_DIR/wob_laptop.sock
@@ -19,22 +19,40 @@ set $woblock_laptop $XDG_RUNTIME_DIR/wob_laptop.lock
 
 output * bg ~/.config/sway/wallpapers/wallpaper fill
 
+output 'eDP-1' pos 760 1440 res 1920x1080
+output 'Dell Inc. DELL U3419W 6RPD6T2' pos 0 0 res 3440x1440
+
+input '1739:52620:SYNA8007:00_06CB:CD8C_Touchpad' middle_emulation disabled
+input '1739:52620:SYNA8007:00_06CB:CD8C_Touchpad' tap enabled
+input '1739:52620:SYNA8007:00_06CB:CD8C_Touchpad' tap_button_map lrm
 
 smart_borders no_gaps
 smart_gaps on
 default_border pixel 2
 #default_border none
 
-exec swayidle -w \
-  timeout 6000 $lock \
-  timeout 6600 'swaymsg "output * dpms off"' \
+for_window [title="YouTube - Mozilla Firefox.*"] inhibit_idle fullscreen
+
+exec_always swayidle -w \
+  timeout 1815 'playerctl pause' \
+  timeout 1820 'swaymsg "output * dpms off"' \
   resume 'swaymsg "output * dpms on"' \
-  before-sleep 'swaylock -f -c 000000'
+  timeout 1830 "$lock" \
+  timeout 1840 'test "$(cat /sys/class/power_supply/AC/online)" = "0" && systemctl suspend' \
+  resume '/home/koen/.cargo/bin/dimmer --restore --duration 1s' \
+  before-sleep "$lock"
+
+exec_always swayidle \
+  timeout 1810 '/home/koen/.cargo/bin/dimmer --save --target 0 --duration 5s' \
+  resume 'pkill dimmer; /home/koen/.cargo/bin/dimmer --restore --duration 1s'
 
 exec --no-startup-id flashfocus
 exec wlsunset -l 52.09157204738723 -L 5.051661491039833
-exec_always sh -c "(test -e $wobsock || mkfifo $wobsock); tail -f $wobsock | wob --bar-color '#99FFFFFF' --background-color '#99000000' --border 0 --padding 0"
-exec_always sh -c "(test -e $wobsock_laptop || mkfifo $wobsock_laptop); tail -f $wobsock_laptop | wob --output eDP-1 --bar-color '#99FFFFFF' --background-color '#99000000' --border 0 --padding 0"
+exec_always sh -c "(test -e $wobsock || mkfifo $wobsock); tail -f $wobsock | wob --bar-color '#33FFFFFF' --background-color '#33000000' --border 0 --padding 0"
+exec_always sh -c "(test -e $wobsock_laptop || mkfifo $wobsock_laptop); tail -f $wobsock_laptop | wob --output eDP-1 --bar-color '#33FFFFFF' --background-color '#33000000' --border 0 --padding 0"
+
+exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 exec --no-startup-id fcitx5 -d
 
@@ -68,6 +86,7 @@ bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. 
 
 # Lock the screen
 bindsym alt+ctrl+l exec $lock
+bindsym $mod+z exec $lock
 
 #
 # Media
@@ -75,11 +94,13 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-bindsym --locked XF86MonBrightnessUp exec light -A 1% && light -G | cut -d'.' -f1 > $wobsock_laptop
-bindsym --locked XF86MonBrightnessDown exec light -U 1% && light -G |cut -d'.' -f1 > $wobsock_laptop
+bindsym --locked XF86MonBrightnessUp exec light -A 5% && light -G | cut -d'.' -f1 > $wobsock
+bindsym --locked XF86MonBrightnessDown exec light -U 5% && light -G |cut -d'.' -f1 > $wobsock
 
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1% && pamixer --get-volume > $wobsock
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1% && pamixer --get-volume > $wobsock
+bindsym XF86Display output eDP-1 toggle
+
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +0.5% && pamixer --get-volume > $wobsock
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -0.5% && pamixer --get-volume > $wobsock
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && ( pamixer --get-mute && echo 0 > $wobsock || pamixer --get-volume > $wobsock )
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
@@ -88,9 +109,9 @@ bindsym Print exec grim -g "$(swaymsg -t get_tree | jq -j '.. | select(.type?) |
 bindsym Print+ctrl exec grim -g "$(swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')" ~/media/screenshots/$(date '+%Y-%m-%d_%H_%M_%S')_$(hostname).png
 # Select a region and screenshoot it
 bindsym Print+Shift exec grim -g "$(slurp)" - | wl-copy -t image/png
-bindsym Print+Shift+ctrl exec grim -g "$(slurp)" - | ~/media/screenshots/$(date '+%Y-%m-%d_%H_%M_%S')_$(hostname).png
+bindsym Print+Shift+ctrl exec grim -g "$(slurp)" ~/media/screenshots/$(date '+%Y-%m-%d_%H_%M_%S')_$(hostname).png
 
-mouse_warping output
+mouse_warping container
 
 bindsym $mod+ctrl+j focus prev
 bindsym $mod+ctrl+k focus next
@@ -105,8 +126,8 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-bindsym $mod+o focus output right
-bindsym $mod+shift+o move workspace output right; focus output right
+bindsym $mod+o focus output up
+bindsym $mod+shift+o move workspace output up, focus output up, focus output up
 
 
 #
@@ -172,6 +193,9 @@ bindsym $mod+shift+o move workspace output right; focus output right
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
+
+    # Toggle show/hide waybar
+    bindsym $mod+x exec pkill -SIGUSR1 waybar
 
   #
   # Scratchpad:
