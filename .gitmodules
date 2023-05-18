@@ -13,9 +13,6 @@
 [submodule "vim/bundle/vim-tabular"]
 	path = vim/bundle/vim-tabular
 	url = https://github.com/godlygeek/tabular.git
-[submodule "vim/bundle/syntastic"]
-	path = vim/bundle/syntastic
-	url = https://github.com/scrooloose/syntastic
 [submodule "vim/bundle/vim-airline"]
 	path = vim/bundle/vim-airline
 	url = https://github.com/bling/vim-airline
@@ -49,3 +46,6 @@
 [submodule "vim/bundle/vim-easy-align"]
 	path = vim/bundle/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
+[submodule "vim/bundle/vim-coloresque"]
+	path = vim/bundle/vim-coloresque
+	url = https://github.com/gko/vim-coloresque.git
