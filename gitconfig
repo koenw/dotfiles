@@ -6,6 +6,10 @@
 [commit]
   gpgsign = true
 
+# Include Parity-specific config (for commit signing mostly) for parity repos.
+[includeIf "gitdir:~/dev/parity/"]
+  path = ~/dev/parity/.gitconfig
+
 [color]
   ui = true
 
