@@ -73,7 +73,8 @@ set smartcase               " Don't make search case insensitive if UC present
 set spell
 
 let mapleader = ';'         " Set the leader to ';', easy on the hands
-noremap <silent> <leader>;  q:
+set showcmd                 " Show `<leader>` in status line while `<leader>` key is active
+noremap <leader>;  q:
 noremap <silent> <leader>e  :NERDTreeFind<CR>
 noremap <silent> <C-e>      :NERDTreeToggle<CR>
 " Bind <leader>vs to setup a vsplit buffer, scrolling 'below' the current buffer
@@ -112,6 +113,8 @@ if v:version > 704 || v:version == 704 && has("patch338")
   set breakindent
 endif
 
+nnoremap <leader>p :set invpaste<CR>
+
 " key bindings for fugitive
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
@@ -125,6 +128,10 @@ nnoremap <silent> <leader>a: :Tabularize /:<CR>
 vnoremap <silent> <leader>a: :Tabularize /:<CR>
 nnoremap <silent> <leader>a<Bar> :Tabularize /<Bar><CR>
 vnoremap <silent> <leader>a<Bar> :Tabularize /<Bar><CR>
+
+" key bindings vor easy-align
+" Align GitHub-flavored Markdown tables
+au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
 " Airline
 let g:airline_powerline_fonts               = 1   " Try to use powerline fonts
