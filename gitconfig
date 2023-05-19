@@ -1,7 +1,7 @@
 [user]
   email = koen@chillheid.nl
   name = Koen Wilde
-  signingkey = 0x2E9A2E85C3A076D9
+  signingkey = 0x791D00FBCE754B51
 
 [commit]
   gpgsign = true
