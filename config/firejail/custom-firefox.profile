@@ -4,6 +4,7 @@
 # needed for the yubikey cannot be named for firejail.
 #protocol unix,inet,inet6
 ignore nou2f
+ignore private-dev
 
 noblacklist ${HOME}/.cache/mozilla
 noblacklist ${HOME}/.mozilla
