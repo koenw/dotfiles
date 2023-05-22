@@ -30,17 +30,6 @@ if which jexec >/dev/null; then
   alias jexec='jexec -l'
 fi
 
-if which docker >/dev/null; then
-  docker_member=false
-  for g in $(groups); do
-    if test "$g" = "docker"; then
-      docker_member=true
-      break
-    fi
-  done
-  $docker_member || alias docker='sudo docker'
-fi
-
 alias find='noglob find'
 alias git='noglob git'
 alias py='python3'
