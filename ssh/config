@@ -7,3 +7,5 @@ CanonicalDomains=koenw.dev
 
 # Project-specific configs
 Include *.conf
+
+#ProxyCommand nc -v -x 127.0.0.1:9050 %h %p
