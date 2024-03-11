@@ -14,7 +14,7 @@
   ui = true
 
 [alias]
-  l = log --graph --decorate --all --date=relative
+  l = log --graph --abbrev-commit --decorate --all --date=relative '--pretty=format:"%C(auto,Yellow)%H %C(auto,Blue)%d%Creset%n%an <%ae> (%G?)%n%ch%n%n%B"'
   s = status -sb
   d = diff
   b = branch -a
