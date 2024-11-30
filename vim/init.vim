@@ -178,3 +178,5 @@ nnoremap <silent> S :call LanguageClient_textDocument_documentSymbol()<CR>
 " vim-bufferline
 " Fix annoying redundant echo beneath statusline
 let g:bufferline_echo = 0
+
+let g:ale_linters = {'rust': ['analyzer']}

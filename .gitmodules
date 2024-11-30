@@ -49,3 +49,15 @@
 [submodule "vim/bundle/vim-coloresque"]
 	path = vim/bundle/vim-coloresque
 	url = https://github.com/gko/vim-coloresque.git
+[submodule "config/alacritty/alacritty-theme"]
+	path = config/alacritty/alacritty-theme
+	url = https://github.com/alacritty/alacritty-theme
+[submodule "vim/bundle/ale"]
+	path = vim/bundle/ale
+	url = https://github.com/dense-analysis/ale.git
+[submodule "vim/bundle/rosepine"]
+	path = vim/bundle/rosepine
+	url = http://github.com/rose-pine/vim
+[submodule "vim/bundle/oceanic-next"]
+	path = vim/bundle/oceanic-next
+	url = https://github.com/mhartington/oceanic-next
